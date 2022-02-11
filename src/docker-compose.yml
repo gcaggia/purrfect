@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  purrfect-app:
+    container_name: purrfect-app
+    image: purrfect-app:1.0.0
+    build:
+      context: ./client
+    ports:
+      - "5080:5080"
+    networks:
+      - purrfect-network
+    restart: unless-stopped
+  purrfect-api:
+    container_name: purrfect-api
+    image: purrfect-api:1.0.0
+    build:
+      context: ./server
+#    command: npm run start:debug
+    ports:
+      - "5081:5081"
+    networks:
+      - purrfect-network
+    restart: unless-stopped
+
+networks:
+  purrfect-network:
